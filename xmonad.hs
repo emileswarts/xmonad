@@ -11,7 +11,6 @@ import XMonad
 import Data.Monoid
 import System.Exit
 import Graphics.X11.ExtraTypes.XF86
-import Xmonad.Util.EZConfig
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -272,10 +271,5 @@ defaults = defaultConfig {
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         logHook            = myLogHook,
-        modMask            = { 
-								mod4Mask
-							 }`additionalKeys`
-							 [((mod4Mask, xF86AudioMute), spawn "xbacklight +20")
-							 ],
         startupHook        = myStartupHook
     }
