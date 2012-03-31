@@ -61,7 +61,7 @@ myFocusedBorderColor = "#ff0000"
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a terminal
-    [ ((modm,               xK_t), spawn $ XMonad.terminal conf)
+    [ ((modm,               xK_t), spawn "gnome-terminal")
 
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu_run")
@@ -208,7 +208,7 @@ myLayout = tiled ||| Mirror tiled ||| Full
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
-    , resource  =? "desktop_window" --> doIgnore
+    , className  =? "Xfdesktop" 	--> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 
 ------------------------------------------------------------------------
