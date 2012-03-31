@@ -62,22 +62,24 @@ myFocusedBorderColor = "#ff0000"
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a terminal
-    [ ((modm,               xK_t), spawn "terminator")
+    [
+	-- Move focus to the next window
+     ((modm,               xK_Tab   ), windows W.focusDown) 
 
-    -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run")
+    -- Push window back into tiling
+    , ((modm,               xK_b     ), withFocused $ windows . W.sink)
+
+	--Launch terminal
+	,((modm,               xK_t), spawn "terminator")
+
+    -- close focused window
+    , ((modm .|. shiftMask, xK_c     ), kill)
 
     --  Reset the layouts on the current workspace to default
     , ((modm .|. shiftMask, xK_f ), spawn "chromium")
 
 	-- launch xfce panel for settings
     , ((modm,               xK_f     ), spawn "firefox")
-
-	-- launch xfce panel for settings
-    , ((modm,               xK_s     ), spawn "xfce4-panel")
-
-    -- close focused window
-    , ((modm .|. shiftMask, xK_c     ), kill)
 
      -- Rotate through the available layout algorithms
     , ((modm,               xK_space ), sendMessage NextLayout)
@@ -88,11 +90,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Resize viewed windows to the correct size
     , ((modm,               xK_n     ), refresh)
 
-    -- Move focus to the next window
-    , ((modm,               xK_Tab   ), windows W.focusDown)
-
     -- Shrink the master area
     , ((modm,               xK_h     ), sendMessage Shrink)
+	--
+    -- Swap the focused window with the next window
+    , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
 
     -- Move focus to the next window
     , ((modm,               xK_j     ), windows W.focusDown)
@@ -103,21 +105,21 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Swap the focused window with the previous window
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
 
+    -- Expand the master area
+    , ((modm,               xK_l     ), sendMessage Expand)
+
     -- Move focus to the master window
     , ((modm,               xK_m     ), windows W.focusMaster  )
+
+    -- launch dmenu
+    , ((modm,               xK_p     ), spawn "dmenu_run")
 
     -- Swap the focused window and the master window
     , ((modm,               xK_Return), windows W.swapMaster)
 
-    -- Swap the focused window with the next window
-    , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
+	-- launch xfce panel for settings
+    , ((modm,               xK_s     ), spawn "xfce4-panel")
 
-
-    -- Expand the master area
-    , ((modm,               xK_l     ), sendMessage Expand)
-
-    -- Push window back into tiling
-    , ((modm,               xK_b     ), withFocused $ windows . W.sink)
 
     -- Increment the number of windows in the master area
     , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
