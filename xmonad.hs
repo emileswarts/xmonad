@@ -67,6 +67,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu_run")
 
+    --  Reset the layouts on the current workspace to default
+    , ((modm .|. shiftMask, xK_f ), spawn "chromium")
+
 	-- launch xfce panel for settings
     , ((modm,               xK_f     ), spawn "firefox")
 
@@ -88,11 +91,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Move focus to the next window
     , ((modm,               xK_Tab   ), windows W.focusDown)
 
+    -- Shrink the master area
+    , ((modm,               xK_h     ), sendMessage Shrink)
+
     -- Move focus to the next window
     , ((modm,               xK_j     ), windows W.focusDown)
 
     -- Move focus to the previous window
     , ((modm,               xK_k     ), windows W.focusUp  )
+
+    -- Swap the focused window with the previous window
+    , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
 
     -- Move focus to the master window
     , ((modm,               xK_m     ), windows W.focusMaster  )
@@ -103,11 +112,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Swap the focused window with the next window
     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
 
-    -- Swap the focused window with the previous window
-    , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
-
-    -- Shrink the master area
-    , ((modm,               xK_h     ), sendMessage Shrink)
 
     -- Expand the master area
     , ((modm,               xK_l     ), sendMessage Expand)
