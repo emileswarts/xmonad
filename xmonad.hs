@@ -10,7 +10,11 @@
 import XMonad
 import Data.Monoid
 import System.Exit
+import System.IO.UTF8
 import Graphics.X11.ExtraTypes.XF86
+import XMonad.Util.Paste
+import XMonad.Util.EZConfig
+import XMonad.Util.Font
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -61,9 +65,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu_run")
-
-    -- launch gmrun
-    , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
