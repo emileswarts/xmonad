@@ -66,6 +66,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu_run")
 
+	-- launch xfce panel for settings
+    , ((modm,               xK_s     ), spawn "xfce4-panel")
+
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
 
