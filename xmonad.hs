@@ -15,6 +15,7 @@ import Graphics.X11.ExtraTypes.XF86
 import XMonad.Util.Paste
 import XMonad.Util.EZConfig
 import XMonad.Util.Font
+import XMonad.Hooks.FadeInactive
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -22,7 +23,7 @@ import qualified Data.Map        as M
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "urxvt"
+myTerminal      = "xterm"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -61,10 +62,13 @@ myFocusedBorderColor = "#ff0000"
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a terminal
-    [ ((modm,               xK_t), spawn "gnome-terminal")
+    [ ((modm,               xK_t), spawn "terminator")
 
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu_run")
+
+	-- launch xfce panel for settings
+    , ((modm,               xK_f     ), spawn "firefox")
 
 	-- launch xfce panel for settings
     , ((modm,               xK_s     ), spawn "xfce4-panel")
@@ -231,7 +235,9 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook = return ()
+myLogHook :: X ()
+myLogHook = fadeInactiveLogHook fadeAmount
+	where fadeAmount = 0.8
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -263,8 +269,6 @@ defaults = defaultConfig {
         borderWidth        = myBorderWidth,
         modMask            = myModMask,
         workspaces         = myWorkspaces,
-        normalBorderColor  = myNormalBorderColor,
-        focusedBorderColor = myFocusedBorderColor,
 
       -- key bindings
         keys               = myKeys,
