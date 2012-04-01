@@ -36,19 +36,21 @@ myFocusedBorderColor = "#ff0000"
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [
+     ((modm,               xK_space ), sendMessage NextLayout)
+    -- Swap the focused window and the master window
+    , ((modm,               xK_Return), windows W.swapMaster)
+    -- Increment the number of windows in the master area
+    , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
 	-- Move focus to the next window
-     ((modm,               xK_Tab   ), windows W.focusDown) 
+    , ((modm,               xK_Tab   ), windows W.focusDown) 
     -- Push window back into tiling
+    , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
     , ((modm,               xK_b     ), withFocused $ windows . W.sink)
-	,((modm,               xK_t), 		spawn "terminator")
     , ((modm .|. shiftMask, xK_c), 		kill)
     , ((modm .|. shiftMask, xK_f), 		spawn "chromium")
     , ((modm,               xK_f), 		spawn "firefox")
-    , ((modm,               xK_space ), sendMessage NextLayout)
     --  Reset the layouts on the current workspace to default
     , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
-    -- Resize viewed windows to the correct size
-    , ((modm,               xK_n     ), refresh)
     -- Shrink the master area
     , ((modm,               xK_h     ), sendMessage Shrink)
     -- Swap the focused window with the next window
@@ -63,20 +65,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_l     ), sendMessage Expand)
     -- Move focus to the master window
     , ((modm,               xK_m     ), windows W.focusMaster  )
-    -- launch dmenu
+    -- Resize viewed windows to the correct size
+    , ((modm,               xK_n     ), refresh)
     , ((modm,               xK_p     ), spawn "dmenu_run")
-    -- Swap the focused window and the master window
-    , ((modm,               xK_Return), windows W.swapMaster)
 	-- launch xfce panel for settings
-    , ((modm,               xK_s     ), spawn "xfce4-panel")
-    -- Increment the number of windows in the master area
-    , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
-    -- Deincrement the number of windows in the master area
-    , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
-    -- Quit xmonad
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
-    -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+    , ((modm,               xK_s     ), spawn "xfce4-panel")
+	, ((modm,               xK_t), 		spawn "terminator")
+    -- Deincrement the number of windows in the master area
+    -- Quit xmonad
     ]
     ++
 
