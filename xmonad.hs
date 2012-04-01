@@ -20,122 +20,61 @@ import XMonad.Hooks.FadeInactive
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
--- The preferred terminal program, which is used in a binding below and by
--- certain contrib modules.
---
 myTerminal      = "xterm"
-
--- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
-
--- Width of the window border in pixels.
---
 myBorderWidth   = 1
-
--- modMask lets you specify which modkey you want to use. The default
--- is mod1Mask ("left alt").  You may also consider using mod3Mask
--- ("right alt"), which does not conflict with emacs keybindings. The
--- "windows key" is usually mod4Mask.
---
 myModMask       = mod4Mask
 
--- The default number of workspaces (virtual screens) and their names.
--- By default we use numeric strings, but any string may be used as a
--- workspace name. The number of workspaces is determined by the length
--- of this list.
---
 -- A tagging example:
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
 myWorkspaces    = ["1:mail","2","3","4","5","6","7","8","9"]
-
--- Border colors for unfocused and focused windows, respectively.
---
 myNormalBorderColor  = "#dddddd"
 myFocusedBorderColor = "#ff0000"
 
-------------------------------------------------------------------------
--- Key bindings. Add, modify or remove key bindings here.
---
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
-
-    -- launch a terminal
     [
 	-- Move focus to the next window
      ((modm,               xK_Tab   ), windows W.focusDown) 
-
     -- Push window back into tiling
     , ((modm,               xK_b     ), withFocused $ windows . W.sink)
-
-	--Launch terminal
-	,((modm,               xK_t), spawn "terminator")
-
-    -- close focused window
-    , ((modm .|. shiftMask, xK_c     ), kill)
-
-    --  Reset the layouts on the current workspace to default
-    , ((modm .|. shiftMask, xK_f ), spawn "chromium")
-
-	-- launch xfce panel for settings
-    , ((modm,               xK_f     ), spawn "firefox")
-
-     -- Rotate through the available layout algorithms
+	,((modm,               xK_t), 		spawn "terminator")
+    , ((modm .|. shiftMask, xK_c), 		kill)
+    , ((modm .|. shiftMask, xK_f), 		spawn "chromium")
+    , ((modm,               xK_f), 		spawn "firefox")
     , ((modm,               xK_space ), sendMessage NextLayout)
-
     --  Reset the layouts on the current workspace to default
     , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
-
     -- Resize viewed windows to the correct size
     , ((modm,               xK_n     ), refresh)
-
     -- Shrink the master area
     , ((modm,               xK_h     ), sendMessage Shrink)
-	--
     -- Swap the focused window with the next window
     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
-
     -- Move focus to the next window
     , ((modm,               xK_j     ), windows W.focusDown)
-
     -- Move focus to the previous window
     , ((modm,               xK_k     ), windows W.focusUp  )
-
     -- Swap the focused window with the previous window
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
-
     -- Expand the master area
     , ((modm,               xK_l     ), sendMessage Expand)
-
     -- Move focus to the master window
     , ((modm,               xK_m     ), windows W.focusMaster  )
-
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu_run")
-
     -- Swap the focused window and the master window
     , ((modm,               xK_Return), windows W.swapMaster)
-
 	-- launch xfce panel for settings
     , ((modm,               xK_s     ), spawn "xfce4-panel")
-
-
     -- Increment the number of windows in the master area
     , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
-
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
-
-    -- Toggle the status bar gap
-    -- Use this binding with avoidStruts from Hooks.ManageDocks.
-    -- See also the statusBar function from Hooks.DynamicLog.
-    --
-    -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
-
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
-
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
     ]
