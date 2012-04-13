@@ -73,6 +73,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
     , ((modm,               xK_s     ), spawn "xfce4-panel")
 	, ((modm,               xK_t), 		spawn "terminator")
+	, ((modm,               xK_v), 		spawn "virtualbox")
     -- Deincrement the number of windows in the master area
     -- Quit xmonad
     ]
