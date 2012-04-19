@@ -181,7 +181,7 @@ myEventHook = mempty
 --
 myLogHook :: X ()
 myLogHook = fadeInactiveLogHook fadeAmount
-	where fadeAmount = 0.8
+	where fadeAmount = 0.7
 
 ------------------------------------------------------------------------
 -- Startup hook
