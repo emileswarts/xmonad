@@ -74,7 +74,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Expand the master area
     , ((modm,               xK_l     ), sendMessage Expand)
     -- Move focus to the master window
-    , ((modm,               xK_m     ), windows W.focusMaster  )
+    --, ((modm,               xK_m     ), windows W.focusMaster  )
+    , ((modm,               xK_m     ), spawn "terminator -e mutt"   )
+    , ((modm .|. shiftMask, xK_m     ), spawn "terminator -e muttem"   )
     -- Resize viewed windows to the correct size
     , ((modm,               xK_n     ), refresh)
     , ((modm,               xK_p     ), spawn "dmenu_run")
