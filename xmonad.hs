@@ -54,6 +54,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_Tab   ), windows W.focusDown) 
     -- Push window back into tiling
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
+    , ((modm,               xK_a     ), spawn "terminator -e alsamixer")
     , ((modm,               xK_b     ), withFocused $ windows . W.sink)
     , ((modm .|. shiftMask, xK_c), 		kill)
     , ((modm .|. shiftMask, xK_f), 		spawn "chromium")
