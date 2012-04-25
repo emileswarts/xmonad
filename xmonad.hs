@@ -30,7 +30,15 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["1:mail","2","3","4","5","6","7","8","9"]
+myWorkspaces    = ["1:mail",
+				   "2:www",
+				   "3:local",
+				   "4:brix",
+				   "5:homer",
+				   "6:vbox",
+				   "7:skype",
+				   "8:other",
+				   "9:otherserver"]
 myNormalBorderColor  = "#dddddd"
 myFocusedBorderColor = "#ff0000"
 
