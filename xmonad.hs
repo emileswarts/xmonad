@@ -167,6 +167,8 @@ myLayout = tiled ||| Mirror tiled ||| Full
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
+    , className =? "Skype"          --> doFloat
+    , className =? "TogglDesktop"   --> doFloat
     , className  =? "Xfdesktop" 	--> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 
