@@ -222,6 +222,6 @@ defaults = defaultConfig {
         layoutHook         = myLayout,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
-        logHook            = myLogHook,
+        --logHook            = myLogHook,
         startupHook        = myStartupHook
     }
