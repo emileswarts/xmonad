@@ -40,6 +40,7 @@ myWorkspaces    = [
 	"7:chat",
 	"8:otherservers",
 	"9:other"]
+
 myNormalBorderColor  = "#dddddd"
 myFocusedBorderColor = "#ff0000"
 
@@ -85,6 +86,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
     , ((modm,               xK_s     ), spawn "xfce4-panel")
 	, ((modm,               xK_t), 		spawn "terminator")
+	--, ((modm .|. shiftMask, xK_t), 		spawn "terminator -e ls")
 	, ((modm,               xK_v), 		spawn "virtualbox")
     -- Deincrement the number of windows in the master area
     -- Quit xmonad
@@ -171,6 +173,7 @@ myLayout = tiled ||| Mirror tiled ||| Full
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
+    , className =? "TogglDesktop"   --> doFloat
     , className  =? "Xfdesktop" 	--> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 
