@@ -31,15 +31,17 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["1:mail",
-				   "2:www",
-				   "3:local",
-				   "4:brix",
-				   "5:homer",
-				   "6:vbox",
-				   "7:skype",
-				   "8:other",
-				   "9:otherserver"]
+myWorkspaces    = [
+	"1:mail",
+	"2:www",
+	"3:local",
+	"4:brix",
+	"5:homer",
+	"6:virtualbox",
+	"7:chat",
+	"8:otherservers",
+	"9:other"]
+
 myNormalBorderColor  = "#dddddd"
 myFocusedBorderColor = "#ff0000"
 
@@ -54,6 +56,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_Tab   ), windows W.focusDown) 
     -- Push window back into tiling
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
+    , ((modm,               xK_a     ), spawn "terminator -e alsamixer")
     , ((modm,               xK_b     ), withFocused $ windows . W.sink)
     , ((modm .|. shiftMask, xK_c), 		kill)
     , ((modm .|. shiftMask, xK_f), 		spawn "chromium")
