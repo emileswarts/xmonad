@@ -16,6 +16,7 @@ import XMonad.Util.Paste
 import XMonad.Util.EZConfig
 import XMonad.Util.Font
 import XMonad.Hooks.FadeInactive
+import XMonad.Actions.CopyWindow
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -71,8 +72,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
     -- Expand the master area
     , ((modm,               xK_l     ), sendMessage Expand)
+	, ((modm, xK_m ), windows copyToAll) -- @@ Make focused window always visible
+	, ((modm .|. shiftMask, xK_m ),  killAllOtherCopies) -- @@ Toggle window state back
     -- Move focus to the master window
-    , ((modm,               xK_m     ), spawn "urxvt -e mutt"  )
     -- Resize viewed windows to the correct size
     , ((modm,               xK_n     ), refresh)
     , ((modm,               xK_p     ), spawn "dmenu_run")
@@ -82,7 +84,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_s     ), spawn "xfce4-panel")
 	, ((modm,               xK_t), 		spawn "terminator")
 	--, ((modm .|. shiftMask, xK_t), 		spawn "terminator -e ls")
-	, ((modm,               xK_v), 		spawn "virtualbox")
     -- Deincrement the number of windows in the master area
     -- Quit xmonad
     ]
