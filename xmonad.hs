@@ -81,7 +81,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	-- launch xfce panel for settings
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
-    , ((modm,               xK_s     ), spawn "xfce4-panel")
+    , ((modm,               xK_s     ), spawn "scrot '%Y-%m-%d_$w$h.png' -e 'mv $f ~/shots/'")
 	, ((modm,               xK_t), 		spawn "terminator")
 	--, ((modm .|. shiftMask, xK_t), 		spawn "terminator -e ls")
     -- Deincrement the number of windows in the master area
