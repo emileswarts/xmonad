@@ -86,6 +86,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
     , ((modm,               xK_s     ), spawn "scrot '%Y-%m-%d_$w$h.png' -e 'mv $f ~/shots/'")
 	, ((modm,               xK_t), 		spawn "terminator")
+	, ((modm,               xK_w), 		spawn "~/bin/wallpaper")
 	--, ((modm .|. shiftMask, xK_t), 		spawn "terminator -e ls")
     -- Deincrement the number of windows in the master area
     -- Quit xmonad
