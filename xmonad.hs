@@ -13,14 +13,13 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Util.Run(spawnPipe)
 import System.IO
 
-
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 myTerminal      = "xterm"
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
-myBorderWidth   = 1
+myBorderWidth   = 0
 myModMask       = mod4Mask
 
 -- A tagging example:
@@ -170,8 +169,8 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , className =? "TogglDesktop"   --> doFloat
-    , className  =? "Xfdesktop" 	--> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    , className  =? "Xfdesktop" 	--> doIgnore 
+	]
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -190,8 +189,8 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook :: X ()
-myLogHook = fadeInactiveLogHook fadeAmount
+--myLogHook :: X ()
+--myLogHook = fadeInactiveLogHook fadeAmount
 	where fadeAmount = 0.7
 
 ------------------------------------------------------------------------
@@ -204,11 +203,6 @@ myLogHook = fadeInactiveLogHook fadeAmount
 -- By default, do nothing.
 myStartupHook = return ()
 
-------------------------------------------------------------------------
--- Now run xmonad with all the defaults we set up.
-
--- Run xmonad with the settings you specify. No need to modify this.
---
 main = do
   xmproc <- spawnPipe "/usr/bin/xmobar /home/korpz/.xmobarrc"
   xmonad defaultConfig {
@@ -225,36 +219,10 @@ main = do
 -- if you are using xmonad 0.9, you can avoid web flash videos getting cropped in fullscreen like so:
 -- manageHook = ( isFullscreen --> doFullFloat ) <+> manageDocks <+> manageHook defaultConfig,
 -- (no longer needed in 0.10)
-    manageHook = manageDocks <+> manageHook defaultConfig,
+    manageHook = myManageHook, 
     layoutHook = avoidStruts $ layoutHook defaultConfig,
     logHook = dynamicLogWithPP $ xmobarPP
                         { ppOutput = hPutStrLn xmproc,
                           ppTitle = xmobarColor "green" "" . shorten 50
                         }
   }
-
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
-defaults = defaultConfig {
-      -- simple stuff
-        terminal           = myTerminal,
-        focusFollowsMouse  = myFocusFollowsMouse,
-        borderWidth        = myBorderWidth,
-        modMask            = myModMask,
-        workspaces         = myWorkspaces,
-
-      -- key bindings
-        keys               = myKeys,
-        mouseBindings      = myMouseBindings,
-
-      -- hooks, layouts
-        layoutHook         = myLayout,
-        manageHook         = myManageHook,
-        handleEventHook    = myEventHook,
-        --logHook            = dynamicLogWithPP $ xmobarPP
-        startupHook        = myStartupHook
-    }
