@@ -1,22 +1,18 @@
---
--- xmonad example config file.
---
--- A template showing all available configuration hooks,
--- and how to override the defaults in your own xmonad.hs conf file.
---
--- Normally, you'd only override those defaults you care about.
---
-
 import XMonad
 import Data.Monoid
 import System.Exit
-import System.IO.UTF8
 import Graphics.X11.ExtraTypes.XF86
 import XMonad.Util.Paste
 import XMonad.Util.EZConfig
 import XMonad.Util.Font
 import XMonad.Hooks.FadeInactive
 import XMonad.Actions.CopyWindow
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
+import XMonad.Util.Run(spawnPipe)
+import System.IO
+
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -213,7 +209,29 @@ myStartupHook = return ()
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad defaults
+main = do
+  xmproc <- spawnPipe "/usr/bin/xmobar /home/korpz/.xmobarrc"
+  xmonad defaultConfig {
+    terminal 				= myTerminal,
+	focusFollowsMouse  		= myFocusFollowsMouse,
+	borderWidth        		= myBorderWidth,
+	modMask            		= myModMask,
+	workspaces         		= myWorkspaces,
+      -- key bindings
+	keys               		= myKeys,
+	mouseBindings      		= myMouseBindings,
+	handleEventHook    		= myEventHook,
+	startupHook        		= myStartupHook,
+-- if you are using xmonad 0.9, you can avoid web flash videos getting cropped in fullscreen like so:
+-- manageHook = ( isFullscreen --> doFullFloat ) <+> manageDocks <+> manageHook defaultConfig,
+-- (no longer needed in 0.10)
+    manageHook = manageDocks <+> manageHook defaultConfig,
+    layoutHook = avoidStruts $ layoutHook defaultConfig,
+    logHook = dynamicLogWithPP $ xmobarPP
+                        { ppOutput = hPutStrLn xmproc,
+                          ppTitle = xmobarColor "green" "" . shorten 50
+                        }
+  }
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
@@ -237,6 +255,6 @@ defaults = defaultConfig {
         layoutHook         = myLayout,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
-        --logHook            = myLogHook,
+        --logHook            = dynamicLogWithPP $ xmobarPP
         startupHook        = myStartupHook
     }
