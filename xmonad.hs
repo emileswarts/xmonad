@@ -19,7 +19,7 @@ import qualified Data.Map        as M
 myTerminal      = "xterm"
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
-myBorderWidth   = 0
+myBorderWidth   = 1
 myModMask       = mod4Mask
 
 -- A tagging example:
