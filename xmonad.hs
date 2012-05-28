@@ -204,7 +204,7 @@ myEventHook = mempty
 myStartupHook = return ()
 
 main = do
-  xmproc <- spawnPipe "/usr/bin/xmobar /home/korpz/.xmobarrc"
+  xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmobarrc"
   xmonad defaultConfig {
     terminal 				= myTerminal,
 	focusFollowsMouse  		= myFocusFollowsMouse,
