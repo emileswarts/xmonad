@@ -51,9 +51,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_Tab   ), windows W.focusDown) 
     -- Push window back into tiling
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
-    , ((modm,               xK_a     ), spawn "terminator -e alsamixer")
-    , ((modm,               xK_b     ), withFocused $ windows . W.sink)
+    , ((modm,               xK_a     ), spawn "gnome-terminal -e 'alsamixer'")
+    , ((modm .|. shiftMask, xK_b     ), withFocused $ windows . W.sink)
     , ((modm .|. shiftMask, xK_c), 		kill)
+    , ((modm,               xK_d     ), spawn "dmenu_run")
     , ((modm .|. shiftMask, xK_f), 		spawn "chromium")
     , ((modm,               xK_f), 		spawn "firefox")
     --  Reset the layouts on the current workspace to default
@@ -75,12 +76,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Move focus to the master window
     -- Resize viewed windows to the correct size
     , ((modm,               xK_n     ), refresh)
-    , ((modm,               xK_p     ), spawn "dmenu_run")
+    , ((modm,               xK_b     ), spawn "gnome-terminal --profile=blue")
+    , ((modm,               xK_g     ), spawn "gnome-terminal --profile=green")
+    , ((modm,               xK_o     ), spawn "gnome-terminal --profile=orange")
+    , ((modm,               xK_p     ), spawn "gnome-terminal --profile=purple")
+    , ((modm,               xK_r     ), spawn "gnome-terminal --profile=red")
 	-- launch xfce panel for settings
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
     , ((modm,               xK_s     ), spawn "scrot '%Y-%m-%d_$w$h.png' -e 'mv $f ~/shots/'")
-	, ((modm,               xK_t), 		spawn "terminator")
+	, ((modm,               xK_t), 		spawn "gnome-terminal")
 	, ((modm,               xK_w), 		spawn "~/bin/wallpaper")
 	--, ((modm .|. shiftMask, xK_t), 		spawn "terminator -e ls")
     -- Deincrement the number of windows in the master area
