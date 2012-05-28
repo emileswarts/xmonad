@@ -80,7 +80,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_g     ), spawn "gnome-terminal --profile=green")
     , ((modm,               xK_o     ), spawn "gnome-terminal --profile=orange")
     , ((modm,               xK_p     ), spawn "gnome-terminal --profile=purple")
-    , ((modm,               xK_r     ), spawn "gnome-terminal --profile=red")
+    , ((modm,               xK_v     ), spawn "gnome-terminal --profile=red")
 	-- launch xfce panel for settings
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
