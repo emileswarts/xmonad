@@ -55,8 +55,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_b     ), withFocused $ windows . W.sink)
     , ((modm .|. shiftMask, xK_c), 		kill)
     , ((modm,               xK_d     ), spawn "dmenu_run")
-    , ((modm .|. shiftMask, xK_f), 		spawn "chromium")
-    , ((modm,               xK_f), 		spawn "firefox")
     --  Reset the layouts on the current workspace to default
     , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
     -- Shrink the master area
