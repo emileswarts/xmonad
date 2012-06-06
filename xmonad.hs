@@ -79,7 +79,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_o     ), spawn "gnome-terminal --profile=orange")
     , ((modm,               xK_p     ), spawn "gnome-terminal --profile=purple")
     , ((modm,               xK_v     ), spawn "gnome-terminal --profile=red")
-	-- launch xfce panel for settings
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
     , ((modm,               xK_s     ), spawn "scrot '%Y-%m-%d_$w$h.png' -e 'mv $f ~/shots/'")
@@ -172,7 +171,6 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , className =? "TogglDesktop"   --> doFloat
-    , className  =? "Xfdesktop" 	--> doIgnore 
 	]
 
 ------------------------------------------------------------------------
@@ -228,4 +226,4 @@ main = do
                         { ppOutput = hPutStrLn xmproc,
                           ppTitle = xmobarColor "green" "" . shorten 50
                         }
-  }
+  } 
