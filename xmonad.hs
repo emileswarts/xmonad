@@ -32,7 +32,7 @@ myWorkspaces    = [
 	"3:local",
 	"4:brix",
 	"5:homer",
-	"6:virtualbox",
+	"6:evil",
 	"7:chat",
 	"8:otherservers",
 	"9:other"]
@@ -171,6 +171,7 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , className =? "TogglDesktop"   --> doFloat
+    , className =? "TogglDesktop"   --> doShift "6:evil"
 	]
 
 ------------------------------------------------------------------------
