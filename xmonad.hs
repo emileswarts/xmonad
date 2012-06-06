@@ -170,7 +170,10 @@ myLayout = tiled ||| Mirror tiled ||| Full
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
+    , className =? "Firefox"   		--> doShift "2:www"
     , className =? "TogglDesktop"   --> doShift "6:evil"
+    , className =? "Skype"   		--> doShift "7:chat"
+    , className =? "Spotify"   		--> doShift "9:other"
 	]
 
 ------------------------------------------------------------------------
