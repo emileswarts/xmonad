@@ -170,7 +170,6 @@ myLayout = tiled ||| Mirror tiled ||| Full
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
-    , className =? "TogglDesktop"   --> doFloat
     , className =? "TogglDesktop"   --> doShift "6:evil"
 	]
 
