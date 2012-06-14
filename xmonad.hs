@@ -168,8 +168,7 @@ myLayout = tiled ||| Mirror tiled ||| Full
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
-    , className =? "Gimp"           --> doFloat
+    [ className =? "Gimp"           --> doFloat
     , className =? "Firefox"   		--> doShift "2:www"
     , className =? "TogglDesktop"   --> doShift "6:evil"
     , className =? "Skype"   		--> doShift "7:chat"
